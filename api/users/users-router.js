@@ -19,12 +19,12 @@ router.get('/:id', validateUserId, (request, response) => {
   // this needs a middleware to verify user id
 });
 
-router.post('/', (request, response) => {
+router.post('/', validateUser, (request, response) => {
   // RETURN THE NEWLY CREATED USER OBJECT
   // this needs a middleware to check that the request body is valid
 });
 
-router.put('/:id', validateUserId, (request, response) => {
+router.put('/:id', validateUserId, validateUser, (request, response) => {
   // RETURN THE FRESHLY UPDATED USER OBJECT
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid

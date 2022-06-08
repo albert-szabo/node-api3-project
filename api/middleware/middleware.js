@@ -30,6 +30,14 @@ async function validateUserId(request, response, next) {
 
 function validateUser(request, response, next) {
   // DO YOUR MAGIC
+
+  const { name } = request.body;
+  if (!name || !name.trim()) {
+    response.status(400).json({ message: 'missing required name field'});
+  } else {
+    request.name = name.trim();
+    next();
+  }
 }
 
 function validatePost(request, response, next) {
