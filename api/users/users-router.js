@@ -10,8 +10,14 @@ const { validateUserId, validateUser, validatePost } = require('../middleware/mi
 
 const router = express.Router();
 
-router.get('/', (request, response) => {
+router.get('/', (request, response, next) => {
   // RETURN AN ARRAY WITH ALL THE USERS
+
+  Users.get()
+    .then(users => {
+      response.json(users);
+    })
+    .catch(next);
 });
 
 router.get('/:id', validateUserId, (request, response) => {
