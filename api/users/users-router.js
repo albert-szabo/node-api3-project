@@ -38,10 +38,19 @@ router.post('/', validateUser, (request, response, next) => {
     .catch(next);
 });
 
-router.put('/:id', validateUserId, validateUser, (request, response) => {
+router.put('/:id', validateUserId, validateUser, (request, response, next) => {
   // RETURN THE FRESHLY UPDATED USER OBJECT
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
+
+  Users.update(request.params.id, { name: request.name })
+    .then(() => {
+      return Users.getById(request.params.id);
+    })
+    .then(updatedUser => {
+      response.json(updatedUser);
+    })
+    .catch(next);
 });
 
 router.delete('/:id', validateUserId, (request, response) => {
@@ -59,6 +68,8 @@ router.post('/:id/posts', validateUserId, validatePost, (request, response) => {
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
 });
+
+
 
 router.use((error, request, response, next) => {
   response.status(error.status || 500).json({ message: 'An internal server error occurred within the users router.' });
