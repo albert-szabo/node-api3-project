@@ -40,7 +40,7 @@ router.get('/:id/posts', validateUserId, (request, response) => {
   // this needs a middleware to verify user id
 });
 
-router.post('/:id/posts', validateUserId, (request, response) => {
+router.post('/:id/posts', validateUserId, validatePost, (request, response) => {
   // RETURN THE NEWLY CREATED USER POST
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid

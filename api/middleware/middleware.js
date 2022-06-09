@@ -42,6 +42,14 @@ function validateUser(request, response, next) {
 
 function validatePost(request, response, next) {
   // DO YOUR MAGIC
+
+  const { text } = request.body;
+  if (!text || !text.trim()) {
+    response.status(400).json({ message: 'missing required text field' });
+  } else {
+    request.text = text.trim();
+    next();
+  }
 }
 
 // do not forget to expose these functions to other modules
