@@ -23,6 +23,8 @@ router.get('/', (request, response, next) => {
 router.get('/:id', validateUserId, (request, response) => {
   // RETURN THE USER OBJECT
   // this needs a middleware to verify user id
+
+  response.json(request.user);
 });
 
 router.post('/', validateUser, (request, response) => {
