@@ -90,7 +90,7 @@ router.post('/:id/posts', validateUserId, validatePost, (request, response, next
 
 
 router.use((error, request, response, next) => {
-  response.status(error.status || 500).json({ message: 'An internal server error occurred within the users router.' });
+  response.status(error.status || 500).json({ message: error.message || 'An internal server error occurred within the users router.' });
 })
 
 // do not forget to export the router
